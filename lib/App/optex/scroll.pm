@@ -129,6 +129,12 @@ It sets the scroll region for the output of the command it executes.
 The output of the command scrolls by default 10 lines from the cursor
 position where it was executed.
 
+=begin html
+
+<p><img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/ping.png">
+
+=end html
+
 =head1 OPTIONS
 
 =over 7

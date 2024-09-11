@@ -12,5 +12,4 @@ os = [
 ]
 
 [FileGatherer]
-exclude_match = ['^images/.*']
-
+exclude_match = [ '^images/.*' ]
