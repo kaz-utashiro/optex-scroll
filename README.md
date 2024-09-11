@@ -1,15 +1,32 @@
 [![Actions Status](https://github.com/kaz-utashiro/optex-scroll/workflows/test/badge.svg)](https://github.com/kaz-utashiro/optex-scroll/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-optex-scroll.svg)](https://metacpan.org/release/App-optex-scroll)
 # NAME
 
-App::optex::scroll - It's new $module
+scroll - optex scroll region module
 
 # SYNOPSIS
 
-    use App::optex::scroll;
+optex -Mscroll \[ options -- \] command
+
+# VERSION
+
+Version 0.01
 
 # DESCRIPTION
 
-App::optex::scroll is ...
+**optex**'s **scroll** module prevents a command that produces output
+longer than terminal hight from causing the executed command line to
+scroll out from the screen.
+
+It sets the scroll region for the output of the command it executes.
+The output of the command scrolls by default 10 lines from the cursor
+position where it was executed.
+
+# OPTIONS
+
+- **--line**=_n_
+
+    Set scroll region lines to _n_.
+    Default is 10.
 
 # LICENSE
 
