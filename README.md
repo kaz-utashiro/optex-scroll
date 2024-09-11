@@ -49,6 +49,14 @@ position where it was executed.
     </a>
 </div>
 
+# SEE ALSO
+
+[App::optex](https://metacpan.org/pod/App%3A%3Aoptex),
+[https://github.com/kaz-utashiro/optex/](https://github.com/kaz-utashiro/optex/)
+
+[App::optex::pingu](https://metacpan.org/pod/App%3A%3Aoptex%3A%3Apingu),
+[https://github.com/kaz-utashiro/optex-pingu/](https://github.com/kaz-utashiro/optex-pingu/)
+
 # LICENSE
 
 Copyright ©︎ 2024 Kazumasa Utashiro.

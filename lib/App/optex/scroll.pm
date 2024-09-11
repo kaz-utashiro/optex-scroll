@@ -165,6 +165,14 @@ Default is 10.
 
 =end html
 
+=head1 SEE ALSO
+
+L<App::optex>,
+L<https://github.com/kaz-utashiro/optex/>
+
+L<App::optex::pingu>,
+L<https://github.com/kaz-utashiro/optex-pingu/>
+
 =head1 LICENSE
 
 Copyright ©︎ 2024 Kazumasa Utashiro.
