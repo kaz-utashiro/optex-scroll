@@ -21,16 +21,33 @@ It sets the scroll region for the output of the command it executes.
 The output of the command scrolls by default 10 lines from the cursor
 position where it was executed.
 
-<div>
-    <p><img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/ping.png">
-</div>
-
 # OPTIONS
 
 - **--line**=_n_
 
     Set scroll region lines to _n_.
     Default is 10.
+
+# EXAMPLES
+
+    optex -Mscroll ping localhost
+
+    optex -Mscroll seq 100000
+
+    optex -Mscroll tail -f /var/log/system.log
+
+<div>
+    <p><img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/ping.png">
+</div>
+
+    optex -Mpingu -Mscroll --line 20 -- ping --pingu -i0.2 -c75 localhost
+
+<div>
+    <p>
+    <a href="https://www.youtube.com/watch?v=C3LoPAe7YB8">
+    <img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/pingu.png">
+    </a>
+</div>
 
 # LICENSE
 

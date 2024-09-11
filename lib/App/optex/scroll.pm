@@ -53,7 +53,7 @@ sub finalize {
 
     my $region = $opt{line};
     flush "\n" x ($region + 0);
-    flush csi_code('CPL', ($region + 0)); # CPL: Cursor Previous line
+    flush csi_code('CPL', ($region + 0)); # CPL: Cursor Previous Line
     my($l, $c) = cursor_position() or return;
     flush sprintf "\e7\e[%d;%dr\e8", $l, $l + $region;
 }
@@ -129,12 +129,6 @@ It sets the scroll region for the output of the command it executes.
 The output of the command scrolls by default 10 lines from the cursor
 position where it was executed.
 
-=begin html
-
-<p><img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/ping.png">
-
-=end html
-
 =head1 OPTIONS
 
 =over 7
@@ -145,6 +139,31 @@ Set scroll region lines to I<n>.
 Default is 10.
 
 =back
+
+=head1 EXAMPLES
+
+    optex -Mscroll ping localhost
+
+    optex -Mscroll seq 100000
+
+    optex -Mscroll tail -f /var/log/system.log
+
+=begin html
+
+<p><img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/ping.png">
+
+=end html
+
+    optex -Mpingu -Mscroll --line 20 -- ping --pingu -i0.2 -c75 localhost
+
+=begin html
+
+<p>
+<a href="https://www.youtube.com/watch?v=C3LoPAe7YB8">
+<img width="750" src="https://raw.githubusercontent.com/kaz-utashiro/optex-scroll/main/images/pingu.png">
+</a>
+
+=end html
 
 =head1 LICENSE
 
