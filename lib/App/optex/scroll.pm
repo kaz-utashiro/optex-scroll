@@ -9,7 +9,7 @@ use Term::ReadKey;
 use Term::ANSIColor::Concise qw(:all);
 use List::Util qw(first pairmap);
 
-our $VERSION = "0.01";
+our $VERSION = "0.99";
 our $debug = $ENV{DEBUG_OPTEX_SCROLL};
 our $TIMEOUT = $ENV{OPTEX_SCROLL_TIMEOUT} || 0.1;
 
@@ -117,7 +117,7 @@ optex -Mscroll [ options -- ] command
 
 =head1 VERSION
 
-Version 0.01
+Version 0.99
 
 =head1 DESCRIPTION
 
