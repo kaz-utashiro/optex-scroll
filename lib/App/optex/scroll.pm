@@ -23,7 +23,7 @@ sub hash_to_spec {
 	if    (not defined $b) { "$a"   }
 	elsif ($b =~ /^\d+$/)  { "$a=i" }
 	else                   { "$a=s" }
-    } %{+shift};
+    } shift->%*;
 }
 
 my($mod, $argv);
@@ -59,7 +59,7 @@ sub finalize {
 }
 
 sub cursor_position {
-    my $answer = ask(csi_code('DSR', 6), qr/R\z/);
+    my $answer = ask(csi_code('DSR', 6), qr/R\z/); # DSR: Device Status Report
     $answer =~ /\e\[(\d+);(\d+)R/ ? ($1, $2) : ();
 }
 
@@ -109,7 +109,7 @@ __END__
 
 =head1 NAME
 
-scroll - optex scroll region module
+App::optex::scroll - optex scroll region module
 
 =head1 SYNOPSIS
 
@@ -165,13 +165,24 @@ Default is 10.
 
 =end html
 
+=head1 INSTALL
+
+Use L<cpanminus(1)> command:
+
+    cpanm App::optex::scroll
+
 =head1 SEE ALSO
 
 L<App::optex>,
 L<https://github.com/kaz-utashiro/optex/>
 
+L<App::optex::scroll>,
+L<https://github.com/kaz-utashiro/optex-scroll/>
+
 L<App::optex::pingu>,
 L<https://github.com/kaz-utashiro/optex-pingu/>
+
+https://vt100.net/docs/vt100-ug/
 
 =head1 LICENSE
 

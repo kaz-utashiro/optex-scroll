@@ -1,7 +1,7 @@
 [![Actions Status](https://github.com/kaz-utashiro/optex-scroll/workflows/test/badge.svg)](https://github.com/kaz-utashiro/optex-scroll/actions) [![MetaCPAN Release](https://badge.fury.io/pl/App-optex-scroll.svg)](https://metacpan.org/release/App-optex-scroll)
 # NAME
 
-scroll - optex scroll region module
+App::optex::scroll - optex scroll region module
 
 # SYNOPSIS
 
@@ -49,13 +49,24 @@ position where it was executed.
     </a>
 </div>
 
+# INSTALL
+
+Use [cpanminus(1)](http://man.he.net/man1/cpanminus) command:
+
+    cpanm App::optex::scroll
+
 # SEE ALSO
 
 [App::optex](https://metacpan.org/pod/App%3A%3Aoptex),
 [https://github.com/kaz-utashiro/optex/](https://github.com/kaz-utashiro/optex/)
 
+[App::optex::scroll](https://metacpan.org/pod/App%3A%3Aoptex%3A%3Ascroll),
+[https://github.com/kaz-utashiro/optex-scroll/](https://github.com/kaz-utashiro/optex-scroll/)
+
 [App::optex::pingu](https://metacpan.org/pod/App%3A%3Aoptex%3A%3Apingu),
 [https://github.com/kaz-utashiro/optex-pingu/](https://github.com/kaz-utashiro/optex-pingu/)
+
+https://vt100.net/docs/vt100-ug/
 
 # LICENSE
 
