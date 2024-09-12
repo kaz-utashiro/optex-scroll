@@ -43,7 +43,7 @@
       "runtime" : {
          "requires" : {
             "App::optex" : "1.00",
-            "Term::ANSIColor::Concise" : "0",
+            "Term::ANSIColor::Concise" : "2.07",
             "Term::ReadKey" : "0",
             "perl" : "5.024"
          }

@@ -10,19 +10,21 @@ use Term::ANSIColor::Concise qw(:all);
 use List::Util qw(first pairmap);
 
 our $VERSION = "0.99";
-our $debug = $ENV{DEBUG_OPTEX_SCROLL};
-our $TIMEOUT = $ENV{OPTEX_SCROLL_TIMEOUT} || 0.1;
 
 my %opt = (
-    line => 10,
+    line    => 10,
+    debug   => \ our $debug,
+    timeout => \(our $timeout = 0.1),
 );
 
 sub hash_to_spec {
     pairmap {
 	$a = "$a|${\(uc(substr($a, 0, 1)))}";
-	if    (not defined $b) { "$a"   }
-	elsif ($b =~ /^\d+$/)  { "$a=i" }
-	else                   { "$a=s" }
+	my $ref = ref $b;
+	if    (not defined $b)   { "$a"   }
+	elsif ($ref eq 'SCALAR') { "$a"   }
+	elsif ($b =~ /^\d+$/)    { "$a=i" }
+	else                     { "$a=s" }
     } shift->%*;
 }
 
@@ -32,8 +34,15 @@ sub flush {
     STDERR->printflush(@_);
 }
 
+sub set_region {
+    flush join('',
+	       csi_code('DECSC'),
+	       csi_code('STBM', @_),
+	       csi_code('DECRC'));
+}
+
 END {
-    flush "\e7\e[r\e8";
+    set_region();
 }
 
 sub finalize {
@@ -52,15 +61,15 @@ sub finalize {
     }
 
     my $region = $opt{line};
-    flush "\n" x ($region + 0);
-    flush csi_code('CPL', ($region + 0)); # CPL: Cursor Previous Line
+    flush "\n" x $region;
+    flush csi_code(CPL => $region); # CPL: Cursor Previous Line
     my($l, $c) = cursor_position() or return;
-    flush sprintf "\e7\e[%d;%dr\e8", $l, $l + $region;
+    set_region($l, $l + $region);
 }
 
 sub cursor_position {
-    my $answer = ask(csi_code('DSR', 6), qr/R\z/); # DSR: Device Status Report
-    $answer =~ /\e\[(\d+);(\d+)R/ ? ($1, $2) : ();
+    my $answer = ask(csi_code(DSR => 6), qr/R\z/); # DSR: Device Status Report
+    csi_report(CPR => 2, $answer);                 # CPR: Cursor Position Report
 }
 
 sub uncntrl {
@@ -77,7 +86,6 @@ sub ask {
     open my $tty, "+<", "/dev/tty" or return;
     ReadMode "cbreak", $tty;
     $tty->printflush($request);
-    my $timeout = $TIMEOUT;
     my $answer = '';
     while (defined (my $key = ReadKey $timeout, $tty)) {
 	if ($debug) {
@@ -98,7 +106,17 @@ sub ask {
 }
 
 sub set {
-    %opt = (%opt, @_);
+    pairmap {
+	if (ref $opt{$a} eq 'SCALAR') {
+	    $opt{$a}->$* = $b;
+	}
+	elsif (ref $opt{$a} eq 'ARRAY') {
+	    push $opt{$a}->@*, $b;
+	}
+	else {
+	    $opt{$a} = $b;
+	}
+    } @_;
 }
 
 1;
