@@ -9,7 +9,7 @@ use Term::ReadKey;
 use Term::ANSIColor::Concise qw(:all);
 use List::Util qw(first pairmap);
 
-our $VERSION = "0.99";
+our $VERSION = "0.9901";
 
 my %opt = (
     line    => 10,
@@ -135,7 +135,7 @@ optex -Mscroll [ options -- ] command
 
 =head1 VERSION
 
-Version 0.99
+Version 0.9901
 
 =head1 DESCRIPTION
 
