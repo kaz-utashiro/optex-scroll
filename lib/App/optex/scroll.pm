@@ -28,8 +28,6 @@ sub hash_to_spec {
     } shift->%*;
 }
 
-my($mod, $argv);
-
 sub flush {
     STDERR->printflush(@_);
 }
@@ -42,11 +40,12 @@ sub set_region {
 }
 
 END {
+    close STDOUT;
     set_region();
 }
 
 sub finalize {
-    ($mod, $argv) = @_;
+    our($mod, $argv) = @_;
 
     #
     # private option handling
@@ -200,7 +199,7 @@ L<https://github.com/kaz-utashiro/optex-scroll/>
 L<App::optex::pingu>,
 L<https://github.com/kaz-utashiro/optex-pingu/>
 
-https://vt100.net/docs/vt100-ug/
+L<https://vt100.net/docs/vt100-ug/>
 
 =head1 LICENSE
 

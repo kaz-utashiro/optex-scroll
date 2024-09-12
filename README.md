@@ -66,7 +66,7 @@ Use [cpanminus(1)](http://man.he.net/man1/cpanminus) command:
 [App::optex::pingu](https://metacpan.org/pod/App%3A%3Aoptex%3A%3Apingu),
 [https://github.com/kaz-utashiro/optex-pingu/](https://github.com/kaz-utashiro/optex-pingu/)
 
-https://vt100.net/docs/vt100-ug/
+[https://vt100.net/docs/vt100-ug/](https://vt100.net/docs/vt100-ug/)
 
 # LICENSE
 
