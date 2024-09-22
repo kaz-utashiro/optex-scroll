@@ -11,7 +11,7 @@ use List::Util qw(first pairmap);
 use Scalar::Util;
 *is_number = \&Scalar::Util::looks_like_number;
 
-our $VERSION = "0.9901";
+our $VERSION = "0.9902";
 
 use App::optex::util::filter qw(interval);
 
@@ -153,7 +153,7 @@ optex -Mscroll [ options -- ] command
 
 =head1 VERSION
 
-Version 0.9901
+Version 0.9902
 
 =head1 DESCRIPTION
 
