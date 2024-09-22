@@ -28,6 +28,11 @@ position where it was executed.
     Set scroll region lines to _n_.
     Default is 10.
 
+- **--interval**=_sec_
+
+    Specifies the interval time in seconds between outputting each line.
+    Default is 0 seconds.
+
 # EXAMPLES
 
     optex -Mscroll ping localhost

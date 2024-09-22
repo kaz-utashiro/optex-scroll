@@ -13,11 +13,14 @@ use Scalar::Util;
 
 our $VERSION = "0.9901";
 
+use App::optex::util::filter qw(interval);
+
 my %opt = (
-    line    => 10,
-    wait    => \ our $wait,
-    debug   => \ our $debug,
-    timeout => \(our $timeout = 0.1),
+    line     => 10,
+    wait     => \(our $wait = 1),
+    debug    => \(our $debug = undef),
+    timeout  => \(our $timeout = 0.1),
+    interval => 0,
 );
 
 sub hash_to_spec {
@@ -49,11 +52,20 @@ END {
 
 sub finalize {
     our($mod, $argv) = @_;
-
     #
     # private option handling
     #
-    if (my $i = (first { $argv->[$_] eq '--' } keys @$argv)) {
+    if (@$argv and $argv->[0] !~ /^-M/ and
+	defined(my $i = first { $argv->[$_] eq '--' } keys @$argv)) {
+	splice @$argv, $i, 1; # remove '--'
+	if (local @ARGV = splice @$argv, 0, $i) {
+	    use Getopt::Long qw(GetOptionsFromArray);
+	    Getopt::Long::Configure qw(bundling);
+	    GetOptions \%opt, hash_to_spec \%opt or die "Option parse error.\n";
+	}
+    }
+    my $i = first { $argv->[$_] eq '--' } keys @$argv;
+    if (defined $i and $argv->[0] !~ /^-M/) {
 	splice @$argv, $i, 1; # remove '--'
 	if (local @ARGV = splice @$argv, 0, $i) {
 	    use Getopt::Long qw(GetOptionsFromArray);
@@ -67,6 +79,10 @@ sub finalize {
     flush csi_code(CPL => $region); # CPL: Cursor Previous Line
     my($l, $c) = cursor_position() or return;
     set_region($l, $l + $region);
+
+    if (my $time = $opt{interval}) {
+	interval(time => $time);
+    }
 }
 
 sub cursor_position {
@@ -157,6 +173,11 @@ position where it was executed.
 
 Set scroll region lines to I<n>.
 Default is 10.
+
+=item B<--interval>=I<sec>
+
+Specifies the interval time in seconds between outputting each line.
+Default is 0 seconds.
 
 =back
 

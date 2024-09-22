@@ -42,7 +42,7 @@
       },
       "runtime" : {
          "requires" : {
-            "App::optex" : "1.00",
+            "App::optex" : "1.0101",
             "List::Util" : "0",
             "Scalar::Util" : "0",
             "Term::ANSIColor::Concise" : "2.07",
