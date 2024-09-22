@@ -8,11 +8,14 @@ use IO::Handle;
 use Term::ReadKey;
 use Term::ANSIColor::Concise qw(:all);
 use List::Util qw(first pairmap);
+use Scalar::Util;
+*is_number = \&Scalar::Util::looks_like_number;
 
 our $VERSION = "0.9901";
 
 my %opt = (
     line    => 10,
+    wait    => \ our $wait,
     debug   => \ our $debug,
     timeout => \(our $timeout = 0.1),
 );
@@ -21,9 +24,9 @@ sub hash_to_spec {
     pairmap {
 	$a = "$a|${\(uc(substr($a, 0, 1)))}";
 	my $ref = ref $b;
-	if    (not defined $b)   { "$a"   }
-	elsif ($ref eq 'SCALAR') { "$a"   }
-	elsif ($b =~ /^\d+$/)    { "$a=i" }
+	if    (not defined $b)   { "$a!"  }
+	elsif ($ref eq 'SCALAR') { "$a!"  }
+	elsif (is_number($b))    { "$a=i" }
 	else                     { "$a=s" }
     } shift->%*;
 }
@@ -40,7 +43,7 @@ sub set_region {
 }
 
 END {
-    close STDOUT;
+    close STDOUT if $wait;
     set_region();
 }
 
