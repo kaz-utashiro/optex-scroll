@@ -75,7 +75,7 @@ Use [cpanminus(1)](http://man.he.net/man1/cpanminus) command:
 
 # LICENSE
 
-Copyright ©︎ 2024 Kazumasa Utashiro.
+Copyright ©︎ 2024-2025 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

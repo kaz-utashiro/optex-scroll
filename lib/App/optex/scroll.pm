@@ -25,12 +25,12 @@ my %opt = (
 
 sub hash_to_spec {
     pairmap {
-	$a = "$a|${\(uc(substr($a, 0, 1)))}";
+	my $k = "$a|${\(uc(substr($a, 0, 1)))}";
 	my $ref = ref $b;
-	if    (not defined $b)   { "$a!"  }
-	elsif ($ref eq 'SCALAR') { "$a!"  }
-	elsif (is_number($b))    { "$a=i" }
-	else                     { "$a=s" }
+	if    (not defined $b)   { "$k!"  }
+	elsif ($ref eq 'SCALAR') { "$k!"  }
+	elsif (is_number($b))    { "$k=f" }
+	else                     { "$k=s" }
     } shift->%*;
 }
 
@@ -68,7 +68,7 @@ sub finalize {
     if (defined $i and $argv->[0] !~ /^-M/) {
 	splice @$argv, $i, 1; # remove '--'
 	if (local @ARGV = splice @$argv, 0, $i) {
-	    use Getopt::Long qw(GetOptionsFromArray);
+	    use Getopt::Long;
 	    Getopt::Long::Configure qw(bundling);
 	    GetOptions \%opt, hash_to_spec \%opt or die "Option parse error.\n";
 	}
@@ -227,7 +227,7 @@ L<https://vt100.net/docs/vt100-ug/>
 
 =head1 LICENSE
 
-Copyright ©︎ 2024 Kazumasa Utashiro.
+Copyright ©︎ 2024-2025 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
